@@ -1,14 +1,16 @@
 import React, {useState} from "react";
 
-function TDLInput({addElem}){
+const TDLInput = ({addElem}) => {
 	const [value, setValue] = useState('');
+
+	const changeValue = event => setValue(event.target.value);
 
 	return (
 			<div className="TDLInput">
-				<input value={value} onChange={event => setValue(event.target.value)}/>
+				<input value={value} onChange={changeValue}/>
 				<button onClick={() => {
-					value && addElem({name: value})
-					setValue('')
+					value.trim() && addElem({name: value});
+					setValue('');
 				}}>Add</button>
 			</div>
 		)

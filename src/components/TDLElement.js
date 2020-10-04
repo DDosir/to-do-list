@@ -1,15 +1,19 @@
 import React from "react";
+import clsx from "clsx";
 
-function TDLElement(props){
+const TDLElement = (props) => {
 		const {index, prop : { name, mark, done }, removeMethod, doneElem, markElem} = props;
-		let className = '';
-		mark ? className +='mark ' : className += '';
-		done ? className +='done ' : className += '';
+
+		const markTDLElem = () => markElem(index);
+		const doneTDLElem = () => doneElem(index);
+		const removeTDLElem = () => removeMethod(index);
+
 		return (
 			<div className="TDLElem">
-				<span className={className} onClick={doneElem}>{name}</span>
-				<button onClick={() => markElem(index)}>!</button>
-				<button onClick={() => removeMethod(index)}>X</button>
+				<span className={clsx(mark ? 'mark' : '', done ? 'done' : '')}>{name}</span>
+				<button onClick={markTDLElem}>!</button>
+				<button onClick={doneTDLElem}>✓</button>
+				<button onClick={removeTDLElem}>X</button>
 			</div>
 		)
 }

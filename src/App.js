@@ -20,29 +20,36 @@ class App extends Component {
         id:123121211,},
       ]
     }
-  }
+  };
+
+  getCount = () => {
+    const {source} = this.state;
+    const len = source.length;
+    const count = source.filter( (item) => item.done).length;
+    return [count, len];
+  };
 
   markElem = index => this.setState({
     source: this.state.source.map( (elem, ind) => ind === index ? {...elem, mark : !elem.mark} : elem)
-  })
+  });
 
   doneElem = index => this.setState({
     source: this.state.source.map( (elem, ind) => ind === index ? {...elem, done : !elem.done} : elem)
-  })
+  });
 
-  addElem = (elem) => this.setState({
+  addElem = elem => this.setState({
       source: [...this.state.source, elem]
-  })
+  });
 
-  removeElem = (index) => this.setState({
+  removeElem = index => this.setState({
       source: this.state.source.filter( (elem,ind) => ind !== index)
-    })
+  });
 
   render() {
     const arrayOfElements = this.state.source;
     return (
       <div>
-        <TDLHeader className="header"/>
+        <TDLHeader className="header" getCount={this.getCount}/>
         {arrayOfElements.map((prop,index) => <TDLElement
           key={prop.id} index={index} prop={prop} doneElem={this.doneElem}
           markElem={this.markElem} removeMethod={this.removeElem}

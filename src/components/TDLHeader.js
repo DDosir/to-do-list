@@ -1,9 +1,11 @@
 import React from "react";
 
-function  TDLHeader(){
+const TDLHeader = ({getCount}) => {
+	const [count, len] = getCount();
 	return (
 		<div>
 			<h1>To Do List</h1>
+			<span>Done: {count}, All: {len}</span>
 		</div>
 	)
 }
